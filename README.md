@@ -67,4 +67,6 @@ The application will start on http://localhost:<port>.
 
 RESTRICTED ACCESS: This is an academic project simulating a law enforcement application. Authorized Law Enforcement Personnel Only. Unauthorized access is punishable under the Information Technology Act, 2000.
 
-Developed by Team Crime Records - 2026
+# Poster
+<img width="1792" height="2400" alt="poster_237 (1)" src="https://github.com/user-attachments/assets/599d1a33-e2eb-469c-ae84-1937cd3a72d2" />
+
