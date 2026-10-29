@@ -1,0 +1,44 @@
+@model IEnumerable<CrimeRecordsSystem.Models.Criminal>
+
+@{
+    ViewData["Title"] = "Criminal Database";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+        <h2 class="text-danger">🚨 Known Offenders Database</h2>
+        <a asp-action="Create" class="btn btn-primary">+ Add New Profile</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <table class="table table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Profile ID</th>
+                <th>Name</th>
+                <th>Aadhar Number</th>
+                <th>Physical Description</th>
+                <th>Known Offenses</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var criminal in Model)
+            {
+                <tr>
+                    <td><strong>#@criminal.CriminalId</strong></td>
+                    <td>@criminal.Name</td>
+                    <td class="text-muted">@criminal.AadharNumber</td>
+                    <td>@criminal.PhysicalDescription</td>
+                    <td><span class="badge bg-secondary">@criminal.KnownOffenses</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

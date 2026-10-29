@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Indian Crime Records</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #0c2340 !important;
+            border-bottom: 4px solid #d4af37;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .navbar-brand span {
+            color: #d4af37;
+        }
+        .btn-primary {
+            background-color: #0c2340;
+            border-color: #0c2340;
+        }
+        .btn-primary:hover {
+            background-color: #1a2f4c;
+            border-color: #1a2f4c;
+        }
+        .table-dark th {
+            background-color: #0c2340 !important;
+            color: white;
+            border-bottom: 3px solid #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark py-2">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand text-light" asp-controller="Home" asp-action="Index">
+                    🛡️ <span>Indian Crime Records</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 ms-4">
+                        @if (Context.Session.GetString("OfficerId") != null)
+                        {
+                            <li class="nav-item"><a class="nav-link text-light px-3" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link text-light px-3" asp-controller="FIR" asp-action="Index">Active Cases</a></li>
+                            <li class="nav-item"><a class="nav-link text-light px-3" asp-controller="FIR" asp-action="Create">File FIR</a></li>
+                            <li class="nav-item"><a class="nav-link text-light px-3" asp-controller="Criminal" asp-action="Index">Criminal Database</a></li>
+                        }
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (Context.Session.GetString("OfficerId") != null)
+                        {
+                            <!-- Updated Navigation Badge: Removed 'Officer:' before the dynamic name -->
+                            <li class="nav-item d-flex align-items-center">
+                                <span class="badge bg-secondary me-3 px-3 py-2 fs-6">👮 @Context.Session.GetString("OfficerName")</span>
+                            </li>
+                            <li class="nav-item d-flex align-items-center">
+                                <a class="btn btn-outline-danger btn-sm px-3" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="btn btn-primary px-4" asp-controller="Auth" asp-action="Login">Secure Login</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container-fluid px-4 flex-grow-1">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center border-top">
+        <div class="container small">
+            &copy; @DateTime.Now.Year - State Police Crime Records Bureau <br/>
+<span class="text-danger fw-bold">RESTRICTED ACCESS:</span> Authorized Law Enforcement Personnel Only. Unauthorized access is punishable under the Information Technology Act, 2000.
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,35 @@
+@model CrimeRecordsSystem.Models.Criminal
+
+<div class="container mt-4">
+    <div class="card shadow border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Add New Criminal Profile</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Name" class="form-label fw-bold">Full Name / Alias</label>
+                        <input asp-for="Name" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="AadharNumber" class="form-label fw-bold">12-Digit Identity Number</label>
+                        <input asp-for="AadharNumber" class="form-control" placeholder="Enter 12-digit ID" required />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PhysicalDescription" class="form-label fw-bold">Physical Description</label>
+                    <textarea asp-for="PhysicalDescription" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="KnownOffenses" class="form-label fw-bold">Known Offenses</label>
+                    <input asp-for="KnownOffenses" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-danger">Save Profile</button>
+            </form>
+        </div>
+    </div>
+</div>

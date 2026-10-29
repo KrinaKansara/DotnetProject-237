@@ -1,0 +1,51 @@
+@model IEnumerable<CrimeRecordsSystem.Models.FIR>
+
+<div class="container mt-4">
+    <h2 class="text-primary border-bottom pb-2">Active FIR Records</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <table class="table table-hover table-bordered mt-3 shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Victim Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fir in Model)
+            {
+                <tr>
+                    <td>@fir.FirId</td>
+                    <td>@fir.VictimName</td>
+                    <td>@fir.IncidentDate.ToShortDateString()</td>
+                    <td>
+                        <span class="badge @(fir.Status == "Closed" ? "bg-success" : "bg-warning")">
+                            @fir.Status
+                        </span>
+                    </td>
+                    <td>
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="id" value="@fir.FirId" />
+                            <select name="newStatus" class="form-select form-select-sm d-inline w-auto">
+                                <option value="Under Investigation">Under Investigation</option>
+                                <option value="Charge Sheet Filed">Charge Sheet Filed</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

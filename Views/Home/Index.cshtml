@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+    <!-- Updated Welcome Header: Removed 'Officer' before the dynamic name -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">Welcome, @Context.Session.GetString("OfficerName")</h2>
+        <span class="text-muted fw-bold">@DateTime.Now.ToString("dddd, dd MMMM yyyy")</span>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white h-100 p-3 shadow border-0" style="border-radius: 12px;">
+                <h6 class="fw-bold mb-3 text-uppercase">Total FIRs Logged</h6>
+                <h1 class="mb-0 fw-bolder display-5">1</h1>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark h-100 p-3 shadow border-0" style="border-radius: 12px;">
+                <h6 class="fw-bold mb-3 text-uppercase">Active Investigations</h6>
+                <h1 class="mb-0 fw-bolder display-5">1</h1>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white h-100 p-3 shadow border-0" style="border-radius: 12px;">
+                <h6 class="fw-bold mb-3 text-uppercase">Cases Closed</h6>
+                <h1 class="mb-0 fw-bolder display-5">0</h1>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white h-100 p-3 shadow border-0" style="border-radius: 12px;">
+                <h6 class="fw-bold mb-3 text-uppercase">Criminal Profiles</h6>
+                <h1 class="mb-0 fw-bolder display-5">1</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Chart Section -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card shadow border-0" style="border-radius: 12px;">
+                <div class="card-header bg-dark text-white border-bottom-0" style="border-radius: 12px 12px 0 0;">
+                    <h6 class="mb-0 fw-bold">FIR Status Distribution</h6>
+                </div>
+                <div class="card-body text-center p-5">
+                    <div class="d-flex justify-content-center mb-4">
+                        <span class="badge bg-warning text-dark mx-2 px-3 py-2">Under Investigation</span>
+                        <span class="badge bg-info text-dark mx-2 px-3 py-2">Charge Sheet Filed</span>
+                        <span class="badge bg-success mx-2 px-3 py-2">Closed</span>
+                    </div>
+                    <!-- CSS Donut Chart Placeholder for Poster -->
+                    <div style="width: 250px; height: 250px; margin: 0 auto; border: 40px solid #ffc107; border-top-color: #ffc107; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

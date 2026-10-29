@@ -1,0 +1,76 @@
+@model CrimeRecordsSystem.Models.FIR
+
+@{
+    ViewData["Title"] = "Register New FIR";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h4 class="mb-0">📝 Digital FIR Registration</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="VictimName" class="form-label fw-bold">Victim's Full Name</label>
+                                <input asp-for="VictimName" class="form-control" placeholder="Enter name" />
+                                <span asp-validation-for="VictimName" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ContactNumber" class="form-label fw-bold">Contact Number</label>
+                                <input asp-for="ContactNumber" class="form-control" placeholder="10-digit number" />
+                                <span asp-validation-for="ContactNumber" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="PoliceStation" class="form-label fw-bold">Police Station (Thana)</label>
+                                <input asp-for="PoliceStation" class="form-control" placeholder="e.g., Tarsadi PS" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="CrimeType" class="form-label fw-bold">Type of Crime</label>
+                                <select asp-for="CrimeType" class="form-select" required>
+                                    <option value="">-- Select Category --</option>
+                                    <option value="Theft/Burglary">Theft/Burglary</option>
+                                    <option value="Assault/Grievous Hurt">Assault/Grievous Hurt</option>
+                                    <option value="Cybercrime/Financial Fraud">Cybercrime/Financial Fraud</option>
+                                    <option value="Missing Person">Missing Person</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="LegalSection" class="form-label fw-bold">IPC / BNS Section</label>
+                                <input asp-for="LegalSection" class="form-control" placeholder="e.g., IPC Sec 378" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IncidentDate" class="form-label fw-bold">Date of Incident</label>
+                            <input asp-for="IncidentDate" type="date" class="form-control" />
+                            <span asp-validation-for="IncidentDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="IncidentDetails" class="form-label fw-bold">Detailed Incident Report</label>
+                            <textarea asp-for="IncidentDetails" class="form-control" rows="5" placeholder="Describe the sequence of events..."></textarea>
+                            <span asp-validation-for="IncidentDetails" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-success px-4">Submit FIR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
